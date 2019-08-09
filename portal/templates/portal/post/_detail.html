@@ -1,0 +1,27 @@
+{% extends "portal/__base.html" %}
+
+{% load fontawesome %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h3>{{ post.title }}</h3>
+            <h5>{{ post.subtitle }}</h3>
+            <h6>Publicação: {{ post.published_at }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col">
+        {{ post.content |safe }}
+      </div>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+{% endblock %}

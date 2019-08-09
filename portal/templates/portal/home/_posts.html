@@ -1,0 +1,16 @@
+{% for post in posts %}
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <a href="{% url 'portal:post_detail' post.id %}" class="h2">{{ post.title }}.</a>
+      <a href="{% url 'portal:post_detail' post.id %}" class="h2"><span class="text-muted"> {{ post.subtitle }}</span></a>
+      <a href="{% url 'portal:post_detail' post.id %}" class="h5 lead"><p>{{ post.abstract }}</p></a>
+    </div>
+    <div class="col-md-5">
+      <a href="{% url 'portal:post_detail' post.id %}">
+        <img src="{{ post.cover.url }}"  class="featurette-image img-fluid mx-auto" width="500" height="500" alt="cover">
+      </a>
+    </div>
+  </div>
+  <hr class="featurette-divider">
+{% endfor %}

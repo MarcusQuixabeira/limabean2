@@ -1,0 +1,135 @@
+{% extends "portal/__base.html" %}
+
+{% load fontawesome %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ researcher.photo.url }}" alt="avatar" width="500" height="500">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h2>{{ researcher.first_name }} {{ researcher.last_name }}</h2>
+                  <h5>{{ researcher.institution.name }} - {{ researcher.institution.short_name }} </h5>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  {{ researcher.bio }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h3>Lattes</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <ul class="fa-ul">
+                    <li> {% fontawesome_icon 'user' li=True %} <a href="{{ researcher.lattes_link }}"
+                        target="blank">{{ researcher.lattes_link }}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h3>Links Sociais</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <ul class="fa-ul">
+                    {% if researcher.facebook_link %}
+                    <li> {% fontawesome_icon 'facebook' li=True %} <a href="{{ researcher.facebook_link }}"
+                        target="blank">{{ researcher.facebook_link }}</a></li>
+                    {% endif %}
+                    {% if researcher.instagram_link %}
+                    <li> {% fontawesome_icon 'instagram' li=True %} <a href="{{ researcher.instagram_link }}"
+                        target="blank">{{ researcher.instagram_link }}</a></li>
+                    {% endif %}
+                    {% if researcher.twitter_link %}
+                    <li> {% fontawesome_icon 'twitter' li=True %} <a href="{{ researcher.twitter_link }}"
+                        target="blank">{{ researcher.twitter_link }}</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <h2 class="text-center"> Artigos Publicados</h2>
+  {% if articles %}
+  <div class="row mt-5">
+    <div id="accordion">
+      {% for article in articles %}
+      <div class="card">
+        <div class="card-header" id="heading-{{ researcher.id }}-{{ article.id }}">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse"
+              data-target="#collapse-{{ researcher.id }}-{{ article.id }}" aria-expanded="expanded"
+              aria-controls="collapse-{{ researcher.id }}-{{ article.id }}">
+              {{ article.title }}
+            </button>
+            {% if article.first_author %}
+            <span class=" float-right badge badge-secondary">Primeiro Autor</span>
+            {% endif %}
+          </h5>
+        </div>
+
+        <div id="collapse-{{ researcher.id }}-{{ article.id }}" class="collapse {% if forloop.first %}show{% endif %}"
+          aria-labelledby="heading-{{ researcher.id }}-{{ article.id }}" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                {{ article.abstract }}
+              </div>
+            </div>
+            {% if article.web_link %}
+            <div class="row mt-3">
+              <div class="col">
+                <a href="{{ article.web_link }}" target="blank" class="float-right btn btn-primary">Ler mais</a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h5>(Sem atrtigos cadastrados para esse pesquisador)</h5>
+    </div>
+  </div>
+  {% endif %}
+
+  <hr class="featurette-divider">
+
+</div>
+{% endblock %}

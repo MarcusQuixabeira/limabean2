@@ -1,0 +1,9 @@
+{% extends "portal/__base.html" %}
+
+{% block content %}
+  {% include "portal/home/_carousel.html" %}
+  <div class="container marketing">
+    {% include "portal/home/_researchers.html" %}
+    {% include "portal/home/_posts.html" %}
+  </div>
+{% endblock %}

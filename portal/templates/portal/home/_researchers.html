@@ -1,0 +1,11 @@
+<!-- Three columns of text below the carousel -->
+<div class="row">
+  {% for researcher in researchers %}
+    <div class="col-lg-4">
+      <img src="{{ researcher.photo.url }}" class="rounded-circle" width="140" height="140" alt="photo">
+      <h2>{{ researcher.first_name }} {{ researcher.last_name }}</h2>
+      <p>{{ researcher.bio }}</p>
+      <p><a class="btn btn-secondary" href="{% url 'portal:researcher_detail' researcher.id %}" role="button">Ver detalhes &raquo;</a></p>
+    </div><!-- /.col-lg-4 -->
+  {% endfor %}
+</div><!-- /.row -->
